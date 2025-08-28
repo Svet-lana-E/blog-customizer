@@ -41,6 +41,7 @@ export const ArticleParamsForm = ({ formState, setFormState }: FormProps) => {
 	useOutsideClickClose({
 		isOpen: isParamFormOpen,
 		rootRef: rootRef,
+		onClose: () => setParamFormIsOpen(false),
 		onChange: setParamFormIsOpen,
 	});
 
@@ -52,7 +53,7 @@ export const ArticleParamsForm = ({ formState, setFormState }: FormProps) => {
 					setParamFormIsOpen(!isParamFormOpen);
 				}}
 			/>
-			<aside className={asideClassName}>
+			<aside ref={rootRef} className={asideClassName}>
 				<form
 					className={styles.form}
 					onSubmit={(e) => {
@@ -63,6 +64,7 @@ export const ArticleParamsForm = ({ formState, setFormState }: FormProps) => {
 					onReset={(e) => {
 						e.preventDefault();
 						setFormState(defaultArticleState);
+						setCurrentFormState(defaultArticleState);
 					}}>
 					<Text as='h2' size={31} weight={800} uppercase>
 						задайте параметры
