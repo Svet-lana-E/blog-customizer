@@ -38,6 +38,12 @@ export const ArticleParamsForm = ({ formState, setFormState }: FormProps) => {
 		setCurrentFormState({ ...currentFormState, [key]: value });
 	};
 
+	useOutsideClickClose({
+		isOpen: isParamFormOpen,
+		rootRef: rootRef,
+		onChange: setParamFormIsOpen,
+	});
+
 	return (
 		<>
 			<ArrowButton
@@ -56,7 +62,7 @@ export const ArticleParamsForm = ({ formState, setFormState }: FormProps) => {
 					}}
 					onReset={(e) => {
 						e.preventDefault();
-						setCurrentFormState(defaultArticleState);
+						setFormState(defaultArticleState);
 					}}>
 					<Text as='h2' size={31} weight={800} uppercase>
 						задайте параметры
@@ -73,7 +79,7 @@ export const ArticleParamsForm = ({ formState, setFormState }: FormProps) => {
 						options={fontSizeOptions}
 						selected={currentFormState.fontSizeOption}
 						onChange={(option) => handleChange('fontSizeOption', option)}
-						name={''}></RadioGroup>
+						name={'font-size'}></RadioGroup>
 					<Select
 						title='цвет шрифта'
 						selected={currentFormState.fontColor}
